@@ -1,6 +1,5 @@
 // compile with "gcc SimonOS.c -o SimonOS"
 //run ./SimonOS
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -821,9 +820,12 @@ void casinoGame() {
         if (bet == 0) {
             printf(BLUE "You're leaving with $%d. Thanks for playing!\n", balance);
             return;
+        } else {
+			printf(RED "Invalid input\n");
+			continue;
         }
         if (bet > balance || bet < 0) {
-            printf(RED "❌ Invalid bet. Try again.\n");
+            printf(RED "Invalid bet. Try again.\n");
             continue;
         }
 
