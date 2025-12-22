@@ -1,4 +1,6 @@
 // compile with "gcc SimonOS.c -o SimonOS"
+// run with "./SimonOS"
+// compile with "gcc SimonOS.c -o SimonOS"
 //run ./SimonOS
 #include <stdio.h>
 #include <stdlib.h>
@@ -779,7 +781,7 @@ void boot_sequence() {
     srand(time(NULL));
     printf(CLEAR);
     print_ascii_banner();
-    printf(WHITE "\nStarting Simon OS...\n" RESET);
+    printf(WHITE "\nbooting Simon OS...\n" RESET);
 
     int count = sizeof(boot_messages) / sizeof(boot_messages[0]);
     for (int i = 0; i < count; ++i) {
@@ -805,23 +807,39 @@ void casino_daily_bonus() {
         printf("You allready used the daily bonus. Try agian in %d hours a %d min.\n", hours, minutes);
     }
 }
-
 void casinoGame() {
-    srand(time(NULL)); 
-    int bet, slot1, slot2, slot3;
+    srand(time(NULL));
+
+    int bet;
+    int slot1, slot2, slot3;
+    char input[32];
 
     printf(GREEN "Welcome to the Casino Slot Machine!\n");
     printf(CYAN "Your starting balance: $%d\n", balance);
 
     while (balance > 0) {
         printf(YELLOW "\nEnter your bet (max $%d, 0 to quit): ", balance);
-        scanf("%d", &bet);
+
+        if (!fgets(input, sizeof(input), stdin)) {
+            printf(RED "Input error!\n");
+            continue;
+        }
+
+        char *end;
+        bet = strtol(input, &end, 10);
+
+        // kontrola: nic nenapsal / znak / bordel
+        if (end == input || (*end != '\n' && *end != '\0')) {
+            printf(RED "Invalid input! Enter a number.\n");
+            continue;
+        }
 
         if (bet == 0) {
             printf(BLUE "You're leaving with $%d. Thanks for playing!\n", balance);
             return;
         }
-        if (bet > balance || bet < 0) {
+
+        if (bet < 0 || bet > balance) {
             printf(RED "Invalid bet. Try again.\n");
             continue;
         }
@@ -837,21 +855,24 @@ void casinoGame() {
             balance += win;
             save_balance();
             printf(CYAN "🏆 Jackpot! You win $%d!\n", win);
-        } else if (slot1 == slot2 || slot2 == slot3 || slot1 == slot3) {
+        }
+        else if (slot1 == slot2 || slot2 == slot3 || slot1 == slot3) {
             int win = bet * 2;
             balance += win;
             save_balance();
             printf(YELLOW "🎉 Small win! You get $%d\n", win);
-        } else {
+        }
+        else {
             balance -= bet;
             printf(RED "😢 You lose $%d\n", bet);
         }
 
         printf("💰 Current balance: $%d\n", balance);
-    }int dailyBonusClaimed = 0;
+    }
 
     printf(RED "💸 You're out of money. Game over!\n");
 }
+
 
 void game() {
     printf(CLEAR);
@@ -1105,7 +1126,7 @@ void launch_shell() {
             printf("Simon OS v2.2 — Experimental Build\n");
 
         } else if (strcmp(input, "version") == 0) {
-            printf("SimonOS Kernel 2.22.0-liatd-x64 version -- 2.1\nNew version in ???\n");
+            printf("SimonOS Kernel 2.24.0-liatd-x64 version -- 2.1\nNew version in ???\n");
 
         } else if (strcmp(input, "ls") == 0) {
             list_files();
@@ -1154,8 +1175,8 @@ void launch_shell() {
         } else if (strcmp(input, "reboot") == 0) {
             printf(YELLOW "Rebooting Simon OS...\n" RESET);
             sleep(2);
-            boot_sequence();
-            launch_shell();
+            system("gcc SimonOS.c -o SimonOS");
+            system("./SimonOS");
             return;
 
         } else if (strcmp(input, "shutdown") == 0) {
