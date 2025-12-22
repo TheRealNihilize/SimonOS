@@ -1,6 +1,4 @@
 // compile with "gcc SimonOS.c -o SimonOS"
-// run with "./SimonOS"
-// compile with "gcc SimonOS.c -o SimonOS"
 //run ./SimonOS
 #include <stdio.h>
 #include <stdlib.h>
