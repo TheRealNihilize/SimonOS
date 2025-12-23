@@ -282,6 +282,7 @@ void help() {
     printf("  cal          - Show calendar\n");
     printf("  neofetch     - Display system info\n");
     printf("  uname        - Show system version\n");
+    printf("  run command  - Run a system command\n");
     printf("  simno FILE   - Open text editor\n\n");
 
     printf(MAGENTA "[ FUN & ENTERTAINMENT ]\n" RESET);
@@ -690,8 +691,14 @@ void run_editor(const char *filename) {
     }
 
     printf(YELLOW "\nExiting editor...\n" RESET);
-}
+} 
 
+void run_command() {
+    char command[300];
+    printf("Enter command to run: ");
+    scanf("%300s", command);
+    system(command);
+}
 void print_startup_text() {
     printf(CLEAR);
     printf(CYAN "Simon OS x64 Premium edition\n" RESET);
@@ -1258,6 +1265,8 @@ void launch_shell() {
 
         } else if (strcmp(input, "comand/lang == bash") == 0) {
             launch_bash();
+        } else if (strcmp(input, "run command") == 0) {
+            run_command();
         } else {
             printf(RED "Command not found: %s\n" RESET, input);
         }
