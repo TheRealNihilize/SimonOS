@@ -1149,7 +1149,7 @@ void launch_shell() {
             see(input + 4);
 
         } else if (strncmp(input, "github", 4) == 0) {
-            printf("Github: https://github.com/WhiteLkidd/SimonOS/SimonOS.c\n");
+            printf("Github: https://github.com/TheRealNihilize/SimonOS/edit/main/SimonOS.c\n");
 
         } else if (strcmp(input, "calc") == 0) {
             app_calculator();
