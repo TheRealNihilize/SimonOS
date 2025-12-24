@@ -1131,7 +1131,7 @@ void launch_shell() {
             printf("Simon OS v2.2 — Experimental Build\n");
 
         } else if (strcmp(input, "version") == 0) {
-            printf("SimonOS Kernel 2.24.0-liatd-x64 version -- 2.1\nNew version in ???\n");
+            printf("SimonOS Kernel 2.24.0-liatd-x64 version -- 2.2\nNew version in ???\n");
 
         } else if (strcmp(input, "ls") == 0) {
             list_files();
@@ -1148,7 +1148,7 @@ void launch_shell() {
             see(input + 4);
 
         } else if (strncmp(input, "github", 4) == 0) {
-            printf("Github: https://github.com/WhiteLkidd/SimonOS/SimonOS.c\n");
+            printf("Github: https://github.com/TheRealNihilize/SimonOSn");
 
         } else if (strcmp(input, "calc") == 0) {
             app_calculator();
