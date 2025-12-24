@@ -288,6 +288,7 @@ void help() {
     printf(MAGENTA "[ FUN & ENTERTAINMENT ]\n" RESET);
     printf("  fortune      - Display random quote\n");
     printf("  matrix       - Matrix effect\n");
+    printf("  daily bonus   - Claim daily casino bonus\n");
     printf("  game         - Show available games\n\n");
     
     printf(YELLOW "[ INFORMATION ]\n" RESET);
@@ -1148,7 +1149,7 @@ void launch_shell() {
             see(input + 4);
 
         } else if (strncmp(input, "github", 4) == 0) {
-            printf("Github: https://github.com/TheRealNihilize/SimonOSn");
+            printf("Github: https://github.com/WhiteLkidd/SimonOS/SimonOS.c\n");
 
         } else if (strcmp(input, "calc") == 0) {
             app_calculator();
@@ -1267,6 +1268,8 @@ void launch_shell() {
             launch_bash();
         } else if (strcmp(input, "run command") == 0) {
             run_command();
+        } else if (strcmp(input, "daily bonus") == 0) {
+            casino_daily_bonus();
         } else {
             printf(RED "Command not found: %s\n" RESET, input);
         }
